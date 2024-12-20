@@ -7,33 +7,20 @@
  * - Dos palabras exactamente iguales no son anagrama.
  */
 
-function Anagrama(palabra1, palabra2) {
-  if (palabra1.length !== palabra2.length) {
-    console.log("No es un anagrama");
-  }
-  if (palabra1 === palabra2) {
-    console.log("No es un anagrama");
+function sonAnagramas(palabra1, palabra2) {
+  const Palabra1Lower = palabra1.toLowerCase(); //se convierte la palabra a miniscula
+  const Palabra2Lower = palabra2.toLowerCase(); //se convierte la palabra a miniscula
+
+  if (Palabra1Lower === Palabra2Lower) {
+    return false; //Si son iguales no puede ser un Anagrama
   }
 
-  let contador1 = {};
-  for (let letra of palabra1) {
-    contador1[letra] = (contador1[letra] || 0) + 1;
-  }
+  const PalabraOrdenada1 = palabra1.split("").sort().join(""); //Primero se separa la palbra luego se ordena y luego se vuelve a unir
+  const PalabraOrdenada2 = palabra2.split("").sort().join(""); //Primero se separa la palbra luego se ordena y luego se vuelve a unir
 
-  let contador2 = {};
-  for (let letra of palabra2) {
-    contador2[letra] = (contador2[letra] || 0) + 1;
+  if (PalabraOrdenada1 === PalabraOrdenada2) {
+    return true; //Si las palabras son ordenadas bien entonces va a devolver true
   }
-
-  for (let letra in contador1) {
-    if (contador1[letra] !== contador2[letra]) {
-      console.log("No es un anagrama");
-    }
-  }
-
-  console.log(contador1);
-  console.log(contador2);
-  console.log("Es un anagrama");
 }
-
-console.log(Anagrama("amor", "roma"));
+console.log(sonAnagramas("amor", "roma")); // true
+console.log(sonAnagramas("amor", "amor")); // false
